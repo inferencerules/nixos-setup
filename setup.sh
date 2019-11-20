@@ -53,10 +53,10 @@ git clone https://github.com/inferencerules/nixos-configs
 sgdisk --clear /dev/nvme0n1
 
 # Create the EFI system partition
-sgdisk --new=0:0:+1G /dev/nvme0n1
+sgdisk --new=0:0:+1G -t 0:ef00 /dev/nvme0n1
 
 # Create the root partition
-sgdisk --new=0:0:0 /dev/nvme0n1
+sgdisk --new=0:0:0 -t 1:8300 /dev/nvme0n1
 
 
 
