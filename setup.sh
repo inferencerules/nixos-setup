@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/run/current-system/sw/bin/bash
 
 ################################################################################
 #           This script performs a full setup of NixOS on a                    #
