@@ -12,7 +12,7 @@
 ################################################################################
 
 # Print out a list of the network interfaces
-ip a 
+ip a
 
 # Query user for wifi use
 read -p "Enter the name of the wireless interface: " interface
@@ -37,11 +37,11 @@ wpa_supplicant -B -i $interface -c <(wpa_passphrase $ssid $pass)
 nix-env -i git
 
 # Clone the nixos-setup repository
-git clone https://github.com/inferencerules/nixos-setup
+git clone https://github.com/inferencerules/nixos-setup.git
 
 
-# Clone the nixos-configs repository
-git clone https://github.com/inferencerules/nixos-configs
+# Clone the dotfiles repository
+git clone https://github.com/inferencerules/dotfiles.git
 
 
 
@@ -132,8 +132,8 @@ nixos-generate-config --root /mnt
 # Move the personal configs into the appropriate directory
 ################################################################################
 
-# Copy everything in the nixos-configs directory to /mnt/etc/nixos
-cp nixos-configs/* /mnt/etc/nixos
+# Link everything in the dotfiles/nixos directory to /mnt/etc/nixos
+ln -s dotfiles/nixos/* /mnt/etc/nixos
 
 
 
