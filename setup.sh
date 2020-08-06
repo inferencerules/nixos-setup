@@ -8,7 +8,7 @@
 ################################################################################
 
 ################################################################################
-# Connect to wifi
+# Connect to wifi                                                              #
 ################################################################################
 
 # Print out a list of the network interfaces
@@ -30,7 +30,7 @@ wpa_supplicant -B -i $interface -c <(wpa_passphrase $ssid $pass)
 
 
 ################################################################################
-# Install git and grab the required config files
+# Install git and grab the required config files                               #
 ################################################################################
 
 # Install git
@@ -46,7 +46,7 @@ git clone https://github.com/inferencerules/dotfiles.git
 
 
 ################################################################################
-# Format the disk
+# Format the disk                                                              #
 ################################################################################
 
 # Wipe the partition table information on the disk
@@ -61,7 +61,7 @@ sgdisk --new=0:0:0 -t 1:8300 /dev/nvme0n1
 
 
 ################################################################################
-# Encrypt and unlock the root physical partition
+# Encrypt and unlock the root physical partition                               #
 ################################################################################
 
 # Set up encryption
@@ -73,7 +73,7 @@ cryptsetup luksOpen /dev/nvme0n1p2 enc-pv # mounts to /dev/mapper/enc-pv
 
 
 ################################################################################
-# Set up LVM
+# Set up LVM                                                                   #
 ################################################################################
 
 # Create the physical volume
@@ -88,7 +88,7 @@ lvcreate -n root vg -l 100%FREE # use the rest of the disk for the logical root
 
 
 ################################################################################
-# Set up filesystems
+# Set up filesystems                                                           #
 ################################################################################
 
 # Format the EFI system partition
@@ -106,7 +106,7 @@ swapon /dev/mapper/vg-swap
 
 
 ################################################################################
-# Mount the filesystems
+# Mount the filesystems                                                        #
 ################################################################################
 
 # Mount the logical root to /mnt
@@ -121,7 +121,7 @@ mount /dev/nvme0n1p1 /mnt/boot
 
 
 ################################################################################
-# Generate the default NixOS and hardware configs
+# Generate the default NixOS and hardware configs                              #
 ################################################################################
 
 nixos-generate-config --root /mnt
@@ -129,7 +129,7 @@ nixos-generate-config --root /mnt
 
 
 ################################################################################
-# Move the personal configs into the appropriate directory
+# Move the personal configs into the appropriate directory                     #
 ################################################################################
 
 # Link everything in the dotfiles/nixos directory to /mnt/etc/nixos
@@ -138,7 +138,7 @@ ln -s dotfiles/nixos/* /mnt/etc/nixos
 
 
 ################################################################################
-# Finally, install NixOS using the preferred configurations
+# Finally, install NixOS using the preferred configurations                    #
 ################################################################################
 
 nixos-install
